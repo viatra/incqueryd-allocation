@@ -1,0 +1,13 @@
+akka {
+  actor {
+    provider = "akka.remote.RemoteActorRefProvider"
+  }
+  remote {
+    transport = "akka.remote.netty.NettyRemoteTransport"
+    netty {
+      hostname = "<ip_address>"
+      port = <port>
+      message-frame-size = 10000000000
+    }
+  }
+}

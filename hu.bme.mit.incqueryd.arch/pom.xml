@@ -1,0 +1,76 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>hu.bme.mit.incqueryd.arch</artifactId>
+	<packaging>pom</packaging>
+	<parent>
+		<groupId>hu.bme.mit.incqueryd</groupId>
+		<artifactId>hu.bme.mit.incqueryd.parent</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>..</relativePath>
+	</parent>
+	<name>IncQuery-D Architecture Descriptors</name>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-maven-plugin</artifactId>
+				<version>${tycho.version}</version>
+				<extensions>true</extensions>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-packaging-plugin</artifactId>
+				<version>${tycho.version}</version>
+				<configuration>
+					<strictBinIncludes>false</strictBinIncludes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-surefire-plugin</artifactId>
+				<version>${tycho.version}</version>
+				<configuration>
+					<argLine>-Xms512m -Xmx1024m -XX:MaxPermSize=512m</argLine>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<repositories>
+
+		<repository>
+			<id>kepler</id>
+			<layout>p2</layout>
+			<url>http://download.eclipse.org/releases/kepler</url>
+		</repository>
+		<repository>
+			<id>incquery</id>
+			<layout>p2</layout>
+			<url>${incquery.update.site}</url>
+		</repository>
+		<repository>
+			<id>emf</id>
+			<layout>p2</layout>
+			<url>http://download.eclipse.org/modeling/emf/emf/updates/releases/</url>
+		</repository>
+		<repository>
+			<id>xtext</id>
+			<layout>p2</layout>
+			<url>http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/</url>
+		</repository>
+
+	</repositories>
+
+	<modules>
+		<module>hu.bme.mit.incqueryd.arch.inventory.model</module>
+		<module>hu.bme.mit.incqueryd.arch.model</module>
+		<module>hu.bme.mit.incqueryd.arch.util</module>
+		
+		<module>hu.bme.mit.incqueryd.arch.edit</module>
+		<module>hu.bme.mit.incqueryd.arch.editor</module>
+		<module>hu.bme.mit.incqueryd.inventory.edit</module>
+		<module>hu.bme.mit.incqueryd.inventory.editor</module>
+	</modules>
+
+</project>

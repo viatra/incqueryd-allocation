@@ -1,0 +1,149 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>hu.bme.mit.incqueryd.tooling</artifactId>
+	<packaging>pom</packaging>
+	<parent>
+		<groupId>hu.bme.mit.incqueryd</groupId>
+		<artifactId>hu.bme.mit.incqueryd.parent</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>..</relativePath>
+	</parent>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-maven-plugin</artifactId>
+				<version>${tycho.version}</version>
+				<extensions>true</extensions>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-packaging-plugin</artifactId>
+				<version>${tycho.version}</version>
+				<configuration>
+					<strictBinIncludes>false</strictBinIncludes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-surefire-plugin</artifactId>
+				<version>${tycho.version}</version>
+				<configuration>
+					<argLine>-Xms512m -Xmx1024m -XX:MaxPermSize=512m</argLine>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.xtend</groupId>
+				<artifactId>xtend-maven-plugin</artifactId>
+				<version>${xtend.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>compile</goal>
+							<goal>testCompile</goal>
+							<goal>xtend-install-debug-info</goal>
+							<goal>xtend-test-install-debug-info</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<outputDirectory>xtend-gen</outputDirectory>
+					<testOutputDirectory>xtend-gen</testOutputDirectory>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>target-platform-configuration</artifactId>
+				<version>${tycho.version}</version>
+				<configuration>
+					<pomDependencies>consider</pomDependencies>
+					<target>
+						<artifact>
+							<groupId>hu.bme.mit.incqueryd</groupId>
+							<artifactId>hu.bme.mit.incqueryd.tooling.targetplatform</artifactId>
+							<version>1.0.0-SNAPSHOT</version>
+						</artifact>
+					</target>
+					<environments>
+						<environment>
+							<os>win32</os>
+							<ws>win32</ws>
+							<arch>x86_64</arch>
+						</environment>
+						<environment>
+							<os>macosx</os>
+							<ws>cocoa</ws>
+							<arch>x86_64</arch>
+						</environment>
+						<environment>
+							<os>linux</os>
+							<ws>gtk</ws>
+							<arch>x86_64</arch>
+						</environment>
+					</environments>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>hu.bme.mit.incqueryd</groupId>
+			<artifactId>hu.bme.mit.incqueryd.arch.model</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+
+	<modules>
+		<module>hu.bme.mit.incqueryd.tooling.targetplatform</module>
+
+		<module>org.eclipse.incquery.patternlanguage.util</module>
+		<module>org.eclipse.incquery.patternlanguage.util.generator.recipe</module>
+
+		<module>../lib/org.mozilla.javascript</module>
+		<module>hu.bme.mit.incqueryd.rdf</module>
+		<module>org.eclipse.incquery.patternlanguage.rdf</module>
+		<module>org.eclipse.incquery.patternlanguage.rdf.tests</module>
+		<module>org.eclipse.incquery.patternlanguage.rdf.ui</module>
+		<module>org.eclipse.incquery.patternlanguage.rdf.psystem</module>
+		<module>org.eclipse.incquery.patternlanguage.rdf.generator.recipe</module>
+
+		<module>org.eclipse.incquery.patternlanguage.mondix</module>
+		<module>org.eclipse.incquery.patternlanguage.mondix.tests</module>
+		<module>org.eclipse.incquery.patternlanguage.mondix.ui</module>
+		<module>org.eclipse.incquery.patternlanguage.mondix.psystem</module>
+		<module>org.eclipse.incquery.patternlanguage.mondix.generator.recipe</module>
+
+		<module>hu.bme.mit.incqueryd.recipe.editor</module>
+
+		<module>hu.bme.mit.incqueryd.tooling.deployment</module>
+
+		<module>hu.bme.mit.incqueryd.tooling.feature</module>
+		<module>hu.bme.mit.incqueryd.tooling.update</module>
+	</modules>
+
+	<repositories>
+		<repository>
+			<id>kepler</id>
+			<layout>p2</layout>
+			<url>http://download.eclipse.org/releases/kepler</url>
+		</repository>
+		<repository>
+			<id>incquery</id>
+			<layout>p2</layout>
+			<url>${incquery.update.site}</url>
+		</repository>
+		<repository>
+			<id>emf</id>
+			<layout>p2</layout>
+			<url>http://download.eclipse.org/modeling/emf/emf/updates/releases/</url>
+		</repository>
+		<repository>
+			<id>xtext</id>
+			<layout>p2</layout>
+			<url>http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/</url>
+		</repository>
+	</repositories>
+
+</project>
