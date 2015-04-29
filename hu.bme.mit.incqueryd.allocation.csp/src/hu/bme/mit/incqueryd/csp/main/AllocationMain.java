@@ -17,8 +17,14 @@ public class AllocationMain {
 		Map<String, Long> stats = StatsUtil.loadStats(allocationConfiguration.getStats());
 		System.out.println(stats);
 		
-		AllocationOptimizer allocator = new AllocationOptimizer(allocationConfiguration.isOptimizeForCost(), allocationConfiguration.getRecipe(), allocationConfiguration.getInventory(), allocationConfiguration.getArchitecture(), stats);
-		if (allocator.allocate()) {
+		AllocationOptimizer allocator = new AllocationOptimizer(allocationConfiguration.isOptimizeForCost(), allocationConfiguration.getInventory());
+		if (allocator.allocate(allocationConfiguration.getRecipe(), allocationConfiguration.getArchitecture(), stats)) {
+			System.out.println("Your arch file is ready");
+		} else {
+			System.out.println("The problem can not be solved with the current resource set!");
+		}
+		
+		if (allocator.allocate(allocationConfiguration.getRecipe(), allocationConfiguration.getArchitecture(), stats)) {
 			System.out.println("Your arch file is ready");
 		} else {
 			System.out.println("The problem can not be solved with the current resource set!");

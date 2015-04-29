@@ -1,6 +1,11 @@
 package hu.bme.mit.incqueryd.csp.algorithm.data
 
-@Data
 class Container extends AbstractContainer{
+	@Property
 	String name
+	
+	new(int capacity, int cost, String name) {
+		super(capacity, cost)
+		this.name = name
+	}
 }

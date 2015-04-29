@@ -56,18 +56,19 @@ public class AllocationOptimizer {
 
 	private Inventory inventory;
 
-	public AllocationOptimizer(boolean optimizeForCost, String recipeFile, String inventoryFile, String architectureFile, Map<String, Long> inputStats) throws IOException {
+	public AllocationOptimizer(boolean optimizeForCost, String inventoryFile) throws IOException {
 		this.optimizeForCommunication = !optimizeForCost;
-		this.recipeFile = recipeFile;
 		this.inventoryFile = inventoryFile;
+		
+		processInventory();
+	}
+	
+	public synchronized boolean allocate(String recipeFile, String architectureFile, Map<String, Long> inputStats ) throws IOException {
 		this.architectureFile = architectureFile;
+		this.recipeFile = recipeFile;
 		
 		ReteRecipe recipe = ArchUtil.loadRecipe(recipeFile);
 		reteNet = new ReteNet(recipe, inputStats);
-	}
-	
-	public boolean allocate() throws IOException {
-		processInventory();
 
 		reteNet.create();
 		edges = reteNet.getEdges();
@@ -91,6 +92,7 @@ public class AllocationOptimizer {
 			Allocation allocation = solver.getAllocation();
 			System.out.println(allocation);
 			createArch(allocation);
+			updateCapacities(allocation);
 		} else {
 			// TO BE IMPLEMENTED
 		}
@@ -155,9 +157,27 @@ public class AllocationOptimizer {
 	}
 	
 	
-	
-	
-	
+	private void updateCapacities(Allocation allocation){
+		Map<String, List<Node>> allocations = allocation.getAllocations();
+		Set<String> machines = allocations.keySet();
+		
+		for (String machine : machines) {
+			List<Node> nodesOnContainer = allocations.get(machine);
+			
+			int usedCapacityOnContainer = 0;
+			for (Node node : nodesOnContainer) {
+				usedCapacityOnContainer += node.getSize();
+			}
+			
+			for (Container container : containers) {
+				if(container.getName().equals(machine)){
+					container.setMemoryCapacity(container.getMemoryCapacity() - usedCapacityOnContainer);
+					break;
+				}
+			}
+			
+		}
+	}
 	
 	
 	private void processInventory() throws IOException {
