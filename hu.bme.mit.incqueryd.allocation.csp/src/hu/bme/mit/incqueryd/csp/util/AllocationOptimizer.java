@@ -45,6 +45,7 @@ public class AllocationOptimizer {
 
 	private int[][] overheads;
 	private final List<Container> containers = new ArrayList<>();
+	private final List<Container> newContainers = new ArrayList<>();
 	private final List<ContainerTemplate> containerTemplates = new ArrayList<>();
 	private int[][] edges;
 	private List<Node> nodes;
@@ -77,6 +78,14 @@ public class AllocationOptimizer {
 		boolean optimizedAllocation = createOptimizedAllocation();
 
 		return optimizedAllocation;
+	}
+	
+	public void addContainer(String ip, int memoryCapacity, MemoryUnit unit, int cost){
+		Container container = new Container(getMemoryInMBs(unit,
+				memoryCapacity), cost, ip);
+		
+		containers.add(container);
+		newContainers.add(container);
 	}
 	
 	private boolean createOptimizedAllocation() throws IOException {
@@ -175,7 +184,6 @@ public class AllocationOptimizer {
 					break;
 				}
 			}
-			
 		}
 	}
 	

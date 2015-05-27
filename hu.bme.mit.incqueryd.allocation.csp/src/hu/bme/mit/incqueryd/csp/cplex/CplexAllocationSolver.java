@@ -121,7 +121,9 @@ public class CplexAllocationSolver {
 		
 		oplFactory.end();
 		
-		createAllocation();
+		if(solved){
+			createAllocation();
+		}
 		
 		if(tempDatFile != null){
 			tempDatFile.delete();
