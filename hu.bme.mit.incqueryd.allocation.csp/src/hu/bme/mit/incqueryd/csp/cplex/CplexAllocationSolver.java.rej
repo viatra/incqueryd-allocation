@@ -1,0 +1,18 @@
+diff a/hu.bme.mit.incqueryd.allocation.csp/src/hu/bme/mit/incqueryd/csp/cplex/CplexAllocationSolver.java b/hu.bme.mit.incqueryd.allocation.csp/src/hu/bme/mit/incqueryd/csp/cplex/CplexAllocationSolver.java	(rejected hunks)
+@@ -118,13 +118,15 @@
+ 		} catch (IloException e) {
+ 			System.exit(-1);
+ 		}
+ 		
+ 		oplFactory.end();
+ 		
+-		createAllocation();
++		if(solved){
++			createAllocation();
++		}
+ 		
+ 		if(tempDatFile != null){
+ 			tempDatFile.delete();
+ 		}
+ 		
+ 		return solved;

@@ -24,11 +24,11 @@ public class AllocationMain {
 			System.out.println("The problem can not be solved with the current resource set!");
 		}
 		
-//		if (allocator.allocate(allocationConfiguration.getRecipe(), allocationConfiguration.getArchitecture(), stats)) {
-//			System.out.println("Your arch file is ready");
-//		} else {
-//			System.out.println("The problem can not be solved with the current resource set!");
-//		}
+		if (allocator.allocate(allocationConfiguration.getRecipe(), allocationConfiguration.getArchitecture(), stats)) {
+			System.out.println("Your arch file is ready");
+		} else {
+			System.out.println("The problem can not be solved with the current resource set!");
+		}
 	}
 
 }

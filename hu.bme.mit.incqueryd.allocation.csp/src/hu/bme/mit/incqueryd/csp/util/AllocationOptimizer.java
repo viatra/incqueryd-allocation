@@ -156,6 +156,7 @@ public class AllocationOptimizer {
 
 				configuration.getMappings().add(infrastructureMapping);
 			}
+			
 		}
 
 		ResourceSet resSet = new ResourceSetImpl();
@@ -184,6 +185,7 @@ public class AllocationOptimizer {
 					break;
 				}
 			}
+			
 		}
 	}
 	
