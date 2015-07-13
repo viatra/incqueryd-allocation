@@ -1,0 +1,149 @@
+package constraints
+
+import "hu.bme.mdsd.onlab" 
+
+pattern allpassangers(P : Passanger) {
+	Passanger(P);
+}
+
+pattern allPassangersWithTarget(P:Passanger, T:Land){
+	Passanger.target(P,T);
+}
+
+/*pattern checkBigger(P1: Passanger, P2: Passanger){
+	Passanger.name(P1, P1Name);
+	Passanger.name(P2, P2Name);
+	check(P1Name < P2Name);
+}
+
+pattern checkBiggerL(L1: Land, L2: Land){
+	Land.name(L1, L1Name);
+	Land.name(L2, L2Name);
+	check(L1Name < L2Name);
+}
+pattern dangerousPassangers(P1: Passanger, P2: Passanger){
+	Danger.dangerousToEachOther(D, P1);
+	Danger.dangerousToEachOther(D, P2);
+	find checkBigger(P1, P2);	
+}
+
+pattern neighbourLands(L1:Land, L2:Land){
+	Land(L1);
+	Land(L2);
+	Land.vehichles.lands(V, L2);
+	Land.vehichles.lands(V, L1);
+	find checkBiggerL(L1, L2);
+}
+
+pattern vehichleBetweenLands(L1: Land, L2: Land, V:Vehichle){
+	Vehichle.lands(V, L1);
+	Vehichle.lands(V, L2);
+}
+pattern numberOfVehichlesBetweenLands(L1: Land, L2: Land, NUM){
+	Land(L1);
+	Land(L2);
+	find checkBiggerL(L1, L2);
+	NUM == count find vehichleBetweenLands(L1, L2, _V);
+}
+
+pattern InVehichles(P:Passanger){
+	Passanger(P);
+	Passanger.travelOn(P, _V);	
+}
+
+pattern notInVehichles(P:Passanger){
+	neg find InVehichles(P);
+}*/
+
+pattern traveler(P:Passanger, V:Vehichle){
+	
+	Passanger.travelOn(P, V);
+}
+
+pattern usedSeats(V: Vehichle, NumOfSeats){
+	NumOfSeats == count find traveler(_, V);
+}
+
+pattern passangersOnLand(L: Land, P: Passanger){
+	Land.passangers(L, P);
+}
+
+pattern NumberOfPassangersOnLand(L: Land, Num){
+	Num == count find passangersOnLand(L, _);
+}
+
+//get into Vehichle
+pattern getInto(V:Vehichle, P:Passanger){
+	Vehichle.actualLand.passangers(V,P);
+	find usedSeats(V, N);
+	Vehichle.seats(V, M);
+	check(M>N);
+}
+//get out of Vehichle
+pattern getOut(V: Vehichle, P:Passanger){
+	Passanger.travelOn(P, V);
+	//Vehichle.actualLand(V, _L);
+}
+
+//get the boat to the other side
+pattern switchLand(V:Vehichle, Start: Land, Cel: Land){
+	Driver.travelOn(_D, V);
+	Vehichle.lands(V, Cel);
+	Vehichle.actualLand(V, Start);
+	Cel!=Start;
+}
+
+@Constraint(location = L1, message = "$P.name$ stayed on two islands at the same time", severity = "warning")
+pattern passangerOnMoreLands(L1: Land, L2: Land, P:Passanger){
+	 Land.passangers(L1, P);
+	 Land.passangers(L2, P);
+	 L1!=L2;
+}
+
+
+pattern passangerWithLand(P:Passanger){
+	Passanger.land(P, _);
+}
+
+@Constraint (location = P, severity = "warning", message = "$P.name$ do not have land")
+pattern passangerWithoutLand(P:Passanger){
+	neg find passangerWithLand(P);
+}
+
+pattern freeSeatsDec(V: Vehichle, NumOfSeats) {
+	Vehichle.seats(V, Seats);
+	find usedSeats(V, NumOfUsedSeats);
+	NumOfSeats == eval(Seats-NumOfUsedSeats);
+}
+
+pattern dangerousPassangersAtOnePlace(D: Danger){
+	Danger.dangerousToEachOther(D, P1);
+	Danger.dangerousToEachOther(D, P2);
+	Danger.guard(D, G);
+	find passangersOnLand(L, P1);
+	find passangersOnLand(L, P2);
+	neg find passangersOnLand(L, G);
+	P1!=P2;
+}
+//end situation
+
+pattern passangerAtRightPlace(P: Passanger, L: Land){
+	Passanger.target(P, L);
+	Passanger.land(P, L);
+}
+
+
+pattern passangerNotAtRightPlace(P:Passanger, L:Land){
+	neg find passangerAtRightPlace(P, L);
+}
+
+
+
+pattern nullPassangerAtWrongPlace(R:PassTheRiver){
+	PassTheRiver(R);
+	N==count find passangerAtRightPlace(_, _);
+	M==count find allpassangers(_);
+	check(N==M);
+}
+
+

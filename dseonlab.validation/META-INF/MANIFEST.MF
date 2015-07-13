@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: dseonlab.validation
+Bundle-SymbolicName: dseonlab.validation;singleton:=true
+Bundle-Version: 0.0.1.qualifier
+Require-Bundle: dseonlab,
+ com.google.guava,
+ org.eclipse.incquery.runtime,
+ org.eclipse.incquery.validation.core
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

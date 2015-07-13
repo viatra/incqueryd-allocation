@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><plugin>
+  <extension id="validation.constraint.constraints.passangerOnMoreLands" point="org.eclipse.incquery.validation.runtime.constraint">
+    <constraint class="constraints.PassangerOnMoreLandsConstraint0" name="constraints.passangerOnMoreLands"/>
+  </extension>
+  <extension id="validation.constraint.constraints.passangerWithoutLand" point="org.eclipse.incquery.validation.runtime.constraint">
+    <constraint class="constraints.PassangerWithoutLandConstraint0" name="constraints.passangerWithoutLand"/>
+  </extension>
+</plugin>
