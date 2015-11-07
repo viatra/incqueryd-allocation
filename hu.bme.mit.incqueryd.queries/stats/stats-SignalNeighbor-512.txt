@@ -1,0 +1,12 @@
+#
+#Wed Oct 22 11:49:50 CEST 2014
+http\://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl\#TrackElement_connectsTo_arity=2
+http\://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl\#Route_exit_arity=2
+http\://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl\#Sensor_trackElement_arity=2
+http\://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl\#Route_routeDefinition_arity=2
+http\://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl\#Route_routeDefinition_size=431616
+http\://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl\#TrackElement_connectsTo_size=2586112
+http\://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl\#Route_exit_size=9728
+http\://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl\#Route_entry_size=8192
+http\://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl\#Sensor_trackElement_size=3208704
+http\://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl\#Route_entry_arity=2

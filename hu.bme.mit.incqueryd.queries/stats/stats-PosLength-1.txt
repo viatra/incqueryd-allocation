@@ -1,0 +1,6 @@
+#
+#Thu Oct 16 22:55:23 CEST 2014
+http\://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl\#Segment_length_size=250
+http\://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl\#Segment_arity=1
+http\://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl\#Segment_length_arity=2
+http\://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl\#Segment_size=500

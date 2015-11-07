@@ -1,0 +1,9 @@
+#
+#Fri Oct 17 18:27:57 CEST 2014
+http\://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl\#TrackElement_sensor_size=2604750
+http\://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl\#Sensor_size=437025
+http\://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl\#Switch_arity=1
+http\://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl\#TrackElement_sensor_arity=2
+http\://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl\#Switch_size=97442
+http\://www.semanticweb.org/ontologies/2011/1/TrainRequirementOntology.owl\#Sensor_arity=1
+

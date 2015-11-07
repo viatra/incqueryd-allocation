@@ -1,8 +1,8 @@
 package hu.bme.mit.incqueryd.csp.cplex;
 
-import hu.bme.mit.incqueryd.csp.algorithm.data.Allocation;
+import hu.bme.mit.incqueryd.allocation.data.Allocation;
+import hu.bme.mit.incqueryd.allocation.data.Node;
 import hu.bme.mit.incqueryd.csp.algorithm.data.Container;
-import hu.bme.mit.incqueryd.csp.algorithm.data.Node;
 import ilog.concert.IloException;
 import ilog.concert.IloIntVarMap;
 import ilog.cp.IloCP;
@@ -42,7 +42,7 @@ public class CplexAllocationSolver {
 			System.err.println("Temporary file could not be created, the operation will be stopped:\n" + e.getMessage());
 			System.exit(-1);
 		}
-		
+
 		IloOplFactory.setDebugMode(false);
 		IloOplFactory oplFactory = new IloOplFactory();
 		IloOplErrorHandler errHandler = oplFactory.createOplErrorHandler();
@@ -58,13 +58,18 @@ public class CplexAllocationSolver {
 		
 		String modelSourceName = null;
 		CharSequence datFileContent = null;
+		int processesLength = nodes.size();
+		String processes = "";
+		for (Node node : nodes) {
+			processes += (node.getSize() + ",");
+		}
 		if(communicationPriority){
-			modelSourceName = "cplex.models/commopt.mod";
-			datFileContent = CplexDatFileGenerator.generateCommOptData(nodes, containers, edges, overheads);
+			modelSourceName = "./../cplex.models/commopt.mod";
+			datFileContent = CplexDatFileGenerator.generateCommOptData(processesLength, processes, containers, edges, overheads);
 		}
 		else{
-			modelSourceName = "cplex.models/costopt.mod";
-			datFileContent = CplexDatFileGenerator.generateCostOptData(nodes, containers);
+			modelSourceName = "./../cplex.models/costopt.mod";
+			datFileContent = CplexDatFileGenerator.generateCostOptData(processesLength, processes, containers);
 		}
 		
 		PrintWriter out = null;
