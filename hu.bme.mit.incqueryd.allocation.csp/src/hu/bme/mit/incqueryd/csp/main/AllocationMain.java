@@ -1,12 +1,9 @@
 package hu.bme.mit.incqueryd.csp.main;
 
-import java.io.IOException;
-
-import org.apache.commons.cli.ParseException;
 
 public class AllocationMain {
 	
-	public static void main(String[] args) throws IOException, ParseException {
+	public static void main(String[] args) {
 		//System.loadLibrary("jniortools");
 //		AllocationConfiguration allocationConfiguration = new AllocationConfiguration(args);
 //		
